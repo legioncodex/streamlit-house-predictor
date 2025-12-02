@@ -27,7 +27,7 @@ def user_input_features():
     Population = st.sidebar.slider('Population', 100.0, 5000.0, 1000.0)
     AveOccup = st.sidebar.slider('Avg. Occupancy', 1.0, 10.0, 3.0)
     Latitude = st.sidebar.slider('Latitude', 32.0, 42.0, 34.0)
-    Longitude = st.sidebar.slider('Longitude', -125.0, -114.0, -118.0)
+    Longitude = st.sidebar.number_input('Longitude', min_value=-125.0, max_value=-114.0, value=-118.0)
 
     data = {
         'MedInc': MedInc, 'HouseAge': HouseAge, 'AveRooms': AveRooms, 
