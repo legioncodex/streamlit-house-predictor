@@ -7,6 +7,7 @@ import numpy as np
 # 1. LOAD THE MODEL (The Pipeline)
 @st.cache_resource
 def load_model():
+    # The saved file contains the StandardScaler AND the Ridge model
     return joblib.load('house_price_model.joblib')
 
 model = load_model()
@@ -18,7 +19,8 @@ st.markdown("Use the input fields on the left to configure the neighborhood. Not
 st.sidebar.header("Input Features")
 
 def user_input_features():
-    # --- Input Fields without min/max constraints ---
+    # Input Fields without min/max constraints
+    # Note: Value arguments set the default number displayed.
     MedInc = st.sidebar.number_input('Median Income ($10k)', value=3.5, step=0.1)
     HouseAge = st.sidebar.number_input('Median House Age', value=20.0, step=1.0)
     AveRooms = st.sidebar.number_input('Avg. Rooms per Household', value=5.0, step=0.1)
@@ -67,7 +69,9 @@ if st.checkbox('Show Model Explanation (Feature Importance)'):
     # Use Streamlit's built-in plotting for simplicity
     st.bar_chart(importance_df.set_index('Feature')['Importance'])
     
+    # This is the block that needed fixing (ensuring the triple quotes are closed)
     st.info("""
     **Interpretation:** Positive bars (high importance) push the price UP. 
     Negative bars (low importance) pull the price DOWN. 
     (E.g., High Median Income should always be a high positive bar.)
+    """)
