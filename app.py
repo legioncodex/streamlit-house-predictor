@@ -13,20 +13,20 @@ model = load_model()
 
 # 2. APP TITLE & INPUTS
 st.title("🏡 California House Price Predictor")
-st.markdown("Use the input fields on the left to configure the neighborhood.")
+st.markdown("Use the input fields on the left to configure the neighborhood. Note: Input fields are now open-ended.")
 
 st.sidebar.header("Input Features")
 
 def user_input_features():
-    # --- Input Fields replaced Sliders ---
-    MedInc = st.sidebar.number_input('Median Income ($10k)', min_value=0.5, max_value=15.0, value=3.5, step=0.1)
-    HouseAge = st.sidebar.number_input('Median House Age', min_value=1.0, max_value=52.0, value=20.0, step=1.0)
-    AveRooms = st.sidebar.number_input('Avg. Rooms per Household', min_value=1.0, max_value=10.0, value=5.0, step=0.1)
-    AveBedrms = st.sidebar.number_input('Avg. Bedrooms', min_value=0.5, max_value=5.0, value=1.0, step=0.1)
-    Population = st.sidebar.number_input('Population', min_value=100.0, max_value=5000.0, value=1000.0, step=10.0)
-    AveOccup = st.sidebar.number_input('Avg. Occupancy', min_value=1.0, max_value=10.0, value=3.0, step=0.1)
-    Latitude = st.sidebar.number_input('Latitude', min_value=32.0, max_value=42.0, value=34.0, step=0.01)
-    Longitude = st.sidebar.number_input('Longitude', min_value=-125.0, max_value=-114.0, value=-118.0, step=0.01)
+    # --- Input Fields without min/max constraints ---
+    MedInc = st.sidebar.number_input('Median Income ($10k)', value=3.5, step=0.1)
+    HouseAge = st.sidebar.number_input('Median House Age', value=20.0, step=1.0)
+    AveRooms = st.sidebar.number_input('Avg. Rooms per Household', value=5.0, step=0.1)
+    AveBedrms = st.sidebar.number_input('Avg. Bedrooms', value=1.0, step=0.1)
+    Population = st.sidebar.number_input('Population', value=1000.0, step=10.0)
+    AveOccup = st.sidebar.number_input('Avg. Occupancy', value=3.0, step=0.1)
+    Latitude = st.sidebar.number_input('Latitude', value=34.0, step=0.01)
+    Longitude = st.sidebar.number_input('Longitude', value=-118.0, step=0.01)
 
     data = {
         'MedInc': MedInc, 'HouseAge': HouseAge, 'AveRooms': AveRooms, 
@@ -71,4 +71,3 @@ if st.checkbox('Show Model Explanation (Feature Importance)'):
     **Interpretation:** Positive bars (high importance) push the price UP. 
     Negative bars (low importance) pull the price DOWN. 
     (E.g., High Median Income should always be a high positive bar.)
-    """)
