@@ -7,27 +7,26 @@ import numpy as np
 # 1. LOAD THE MODEL (The Pipeline)
 @st.cache_resource
 def load_model():
-    # The saved file contains the StandardScaler AND the Ridge model
     return joblib.load('house_price_model.joblib')
 
 model = load_model()
 
 # 2. APP TITLE & INPUTS
 st.title("🏡 California House Price Predictor")
-st.markdown("Use the sliders on the left to configure the neighborhood.")
+st.markdown("Use the input fields on the left to configure the neighborhood.")
 
 st.sidebar.header("Input Features")
 
 def user_input_features():
-    # Feature inputs must match the data used in train_model.py
-    MedInc = st.sidebar.slider('Median Income ($10k)', 0.5, 15.0, 3.5)
-    HouseAge = st.sidebar.slider('Median House Age', 1.0, 52.0, 20.0)
-    AveRooms = st.sidebar.slider('Avg. Rooms per Household', 1.0, 10.0, 5.0)
-    AveBedrms = st.sidebar.slider('Avg. Bedrooms', 0.5, 5.0, 1.0)
-    Population = st.sidebar.slider('Population', 100.0, 5000.0, 1000.0)
-    AveOccup = st.sidebar.slider('Avg. Occupancy', 1.0, 10.0, 3.0)
-    Latitude = st.sidebar.slider('Latitude', 32.0, 42.0, 34.0)
-    Longitude = st.sidebar.number_input('Longitude', value=-118.0)
+    # --- Input Fields replaced Sliders ---
+    MedInc = st.sidebar.number_input('Median Income ($10k)', min_value=0.5, max_value=15.0, value=3.5, step=0.1)
+    HouseAge = st.sidebar.number_input('Median House Age', min_value=1.0, max_value=52.0, value=20.0, step=1.0)
+    AveRooms = st.sidebar.number_input('Avg. Rooms per Household', min_value=1.0, max_value=10.0, value=5.0, step=0.1)
+    AveBedrms = st.sidebar.number_input('Avg. Bedrooms', min_value=0.5, max_value=5.0, value=1.0, step=0.1)
+    Population = st.sidebar.number_input('Population', min_value=100.0, max_value=5000.0, value=1000.0, step=10.0)
+    AveOccup = st.sidebar.number_input('Avg. Occupancy', min_value=1.0, max_value=10.0, value=3.0, step=0.1)
+    Latitude = st.sidebar.number_input('Latitude', min_value=32.0, max_value=42.0, value=34.0, step=0.01)
+    Longitude = st.sidebar.number_input('Longitude', min_value=-125.0, max_value=-114.0, value=-118.0, step=0.01)
 
     data = {
         'MedInc': MedInc, 'HouseAge': HouseAge, 'AveRooms': AveRooms, 
